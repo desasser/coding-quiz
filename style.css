@@ -4,6 +4,9 @@ body {
 
 h1 {
     font-size: 42px;
+    /* width: 50vw;
+    margin: 0 auto;
+    padding: 20px; */
 }
 
 header {
@@ -55,8 +58,18 @@ header {
     border:none;
 }
 
+/* .answerBtn {
+    background-color: #bada55;
+    border-radius: 0.5em;
+    font-size: 20px;
+    margin: 10px;
+    height: 50px;
+    width: 150px;
+    border:none;
+} */
+
 #answers {
-    width:40vw;
+    width:50vw;
     margin: 0 auto;
     list-style: none;
     text-align: left;

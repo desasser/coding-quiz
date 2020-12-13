@@ -64,6 +64,7 @@ var answersOne = ["strings", "boolean", "numbers", "alerts"];
 var answersTwo = [":",  ";", "}", "none"];
 var answersThree = ["click", "submit", "keydown", "right-click"];
 var answersFour = ["Paired Data", "Alphabets", "Zoo Animals", "People's Souls"];
+var answerArr = [answersOne, answersFour, answersThree, answersFour];
 
 
 // var question1 = "this is my question"
@@ -78,25 +79,44 @@ var answersFour = ["Paired Data", "Alphabets", "Zoo Animals", "People's Souls"];
 
 //TODO: Display end of game screen
 function gameOver() {
-
+    headerDisplay.textContent = "Game Over";
+    btnClick.style.display = "none";
 }
 
 //TODO: Clear the previous screen and post the next question with answers
 function nextQuestion(index) {
-    headerDisplay.textContent = questionArr[index];
-    headerDisplay.style.fontSize = "30px";
-    pText.textContent = "";
-    btnClick.style.display = "none";
-    for (var i = 0; i < answersOne.length; i++) {
-        var liEl = document.createElement("li");
-        // liEl.textContent = i+1 + ". " + answersOne[i];
-        console.log(liEl);
-        var buttonToo = document.createElement("button");
-        buttonToo.textContent = i+1 + ". " + answersOne[i];
-        //can i call a css style here?
-        buttonToo.style
-        liEl.appendChild(buttonToo);
-        answersEl.appendChild(liEl);    
+    if (index < questionArr.length) {
+        headerDisplay.textContent = questionArr[index];
+        headerDisplay.style.fontSize = "30px";
+        pText.textContent = "";
+        btnClick.style.display = "none";
+        //TODO: Change this block to loop through an array containing arrays
+        
+        //Index is the indicator for the question and answer set
+        //So I want to access answerArr[index] and render the answers
+        
+        for (var i = 0; i < answerArr.length; i++) {
+            var liEl = document.createElement("li");
+            // liEl.textContent = i+1 + ". " + answersOne[i];
+            console.log(liEl);
+            var buttonToo = document.createElement("button");
+            buttonToo.textContent = i+1 + ". " + answersOne[i];
+    
+            //TODO: BONUS BONUS BONUS: Can I call a css style here? Set Attribute?
+            buttonToo.style.backgroundColor = "#bada55";
+            buttonToo.style.fontSize = "20px";
+            buttonToo.style.margin = "5px";
+            buttonToo.style.height = "50px";
+            buttonToo.style.width = "150px";
+            buttonToo.style.borderRadius = "0.25em";
+            buttonToo.style.border = "none";
+            buttonToo.style.textAlign = "left";
+    
+            liEl.appendChild(buttonToo);
+            answersEl.appendChild(liEl);    
+        } 
+    } else {
+        gameOver();
     }
 }
 
@@ -110,7 +130,18 @@ btnClick.addEventListener("click", function(event) {
     //Wipe off the screen when clicked
     nextQuestion(btnCounter);
     btnCounter++;
+    console.log(btnCounter);
 });
+
+answersEl.addEventListener("click", function(event) {
+    event.preventDefault();
+
+    //Wipe off the screen when clicked
+    nextQuestion(btnCounter);
+    btnCounter++;
+    console.log(btnCounter);
+});
+
 
 //TODO: When timer reaches 0 or all questions have been answered, the quiz ends
 //TODO: When the quiz ends, display your score and display input for initals to save the highscore into a list
