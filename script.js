@@ -1,7 +1,14 @@
-//TODO: Announce the page is a Coding Quiz Challenge and explain the rules
-    //TODO: Static text displaying the intro to the page, one h1-tag and one p-tag
-//TODO: Display a button on the page beneath the description
-    //TODO: Style the button to be fancy and say 'Start Quiz'
+//Declare reference variables to HTML
+var highscoreBtn = document.getElementById("highscoreBtn");
+var timeDisplay = document.getElementById("timeDisplay");
+var headerDisplay = document.getElementById("header");
+var pText = document.getElementById("pText");
+var btnClick = document.getElementById("btnFlavor");
+var timeEl = document.getElementById("timer");
+//Need to confirm getElementsByClassName works here or switch to getElementsById
+var quiz = document.getElementsByClassName("quiz");
+
+
 //TODO: When the button is clicked, start a timer for 100 seconds and present the first question
     //TODO: Timer should display in top right corner, counting down
     //TODO: Each question should have four multiple choice options, each is a button
@@ -9,6 +16,34 @@
         //TODO: If the answer is wrong, subtract 10 seconds from the timer
     //TODO: Display the next question and beneath the answers, display whether the previous answer was right or wrong
     //TODO: BONUS: Track the number of right and wrong answers
+    console.log(btnClick);
+
+var secondsLeft = 5;
+
+//Initialize and increment timer
+function setTime() {
+    var timerInterval = setInterval(function () {
+        secondsLeft--;
+        timeEl.textContent = secondsLeft;
+    if (secondsLeft === 0) {
+        clearInterval(timerInterval);
+        gameOver();
+    }
+    console.log(secondsLeft);
+    }, 1000);
+};
+
+//TODO: Display end of game screen
+function gameOver() {
+
+}
+
+btnClick.addEventListener("click", function(event) {
+    event.preventDefault();
+    setTime();
+    console.log('click');
+});
+
 //TODO: When timer reaches 0 or all questions have been answered, the quiz ends
 //TODO: When the quiz ends, display your score and display input for initals to save the highscore into a list
     //TODO: BONUS: Display the total number of right and wrong answers

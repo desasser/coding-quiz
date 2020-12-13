@@ -7,9 +7,19 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header>
+        <!-- Display header text, kind of cheated? -->
+        <span id="highscoreBtn"><strong>View Highscores</strong></span>
+        <span id="timeDisplay"><strong>Time:  </strong></span>
+        <span id="timer"></span>
+    </header>
+    <hr>
+    <!-- Announce the page is a Coding Quiz Challenge and explain the rules, static text displaying the intro to the page, one h1-tag and one p-tag -->
     <div class="quiz">
-        <h1>Coding Quiz Challenge</h1>
-        <p class="pContainer">Try to answer the following code-related questions within the time limit. Incorrect scores will cost you 10 seconds off the clock!</p>
+        <h1 id="header"><strong>Quiz Challenge</strong></h1>
+        <p class="pContainer" id="pText"><strong>Try to answer the following code-related questions within the time limit. Incorrect scores will cost you 10 seconds off the clock!</strong></p>
+        <!-- Display a button on the page beneath the description, style the button to be fancy and say 'Start Quiz' -->
+        <button id="btnFlavor"><strong>Start Quiz</strong> </button>
     </div>
     <script src="script.js"></script>
 </body>
