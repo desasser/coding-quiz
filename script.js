@@ -40,11 +40,12 @@ function setTime() {
     var timerInterval = setInterval(function () {
         secondsLeft--;
         timeDisplay.textContent = "Time: " + secondsLeft;
-        //better way to style this by referencing the css sheet somehow?
+        //TODO: BONUS BONUS: Styling via CSS block?
         timeDisplay.style.fontFamily = "Arial, Helvetica, sans-serif";
         timeDisplay.style.fontSize = "18px";
         timeDisplay.style.fontWeight = "bold";
         
+    //When timer reaches 0, the quiz ends
     if (secondsLeft === 0) {
         clearInterval(timerInterval);
         gameOver();
@@ -58,13 +59,16 @@ function setTime() {
 "Which of the below is not an event listener", "click, submit, keydown, right-click"
 "Objects in javascript are used to store what kind of data", "Paired Data, Alphabets, Zoo Animals, People's Souls"
 
+//Declare question arrays
 var questionArr = ["Commonly used data types do not include:", "In Javascript, what symbol do you need at the end of each line?", "Which of the below is not an event listener:", "Objects in javascript are used to store what kind of data?"];
 
-var answersOne = ["strings", "boolean", "numbers", "alerts"];
-var answersTwo = [":",  ";", "}", "none"];
+//Declare answer arrays
+var answersOne = ["strings", "numbers", "alerts", "boolean"];
+var answersTwo = [":",  "none", "}", ";"];
 var answersThree = ["click", "submit", "keydown", "right-click"];
 var answersFour = ["Paired Data", "Alphabets", "Zoo Animals", "People's Souls"];
 var answerArr = [answersOne, answersTwo, answersThree, answersFour];
+var correctAnswers = ["alerts", "none", "right-click", "paired data"]
 
 
 // var question1 = "this is my question"
@@ -83,6 +87,8 @@ function gameOver() {
     headerDisplay.textContent = "Game Over!";
     answersEl.textContent = "";
     pText.textContent = "Your Score: " + secondsLeft;
+    
+    //TODO: BONUS BONUS: Styling via CSS block?
     pText.style.fontFamily = "Arial, Helvetica, sans-serif";
     pText.style.fontSize = "18px";
     pText.style.fontWeight = "bold";
@@ -93,6 +99,7 @@ function gameOver() {
 
 //Clear the previous screen and post the next question with answers
 function nextQuestion(index) {
+    //If all questions have been answered, the quiz ends
     if (index < questionArr.length) {
         headerDisplay.textContent = questionArr[index];
         headerDisplay.style.fontSize = "30px";
@@ -124,6 +131,8 @@ function nextQuestion(index) {
     
             liEl.appendChild(buttonToo);
             answersEl.appendChild(liEl);    
+            //TODO: Variable to display correct or wrong and then show it under the next question
+            //TODO: Edge case, no answers yet: Conditional, if answer exists, then display it
         } 
     } else {
         gameOver();
@@ -146,6 +155,8 @@ btnClick.addEventListener("click", function(event) {
 answersEl.addEventListener("click", function(event) {
     event.preventDefault();
 
+    //TODO: Conditional to evaluate right or wrong answer
+
     //Wipe off the screen when clicked
     nextQuestion(btnCounter);
     btnCounter++;
@@ -154,7 +165,7 @@ answersEl.addEventListener("click", function(event) {
 });
 
 
-//TODO: When timer reaches 0 or all questions have been answered, the quiz ends
+
 //TODO: When the quiz ends, display your score and display input for initals to save the highscore into a list
     //TODO: BONUS: Display the total number of right and wrong answers
     //TODO: BONUS BONUS: Display the questions that were answered wrong and their correct answers against what was answered
