@@ -7,9 +7,9 @@ h1 {
 }
 
 header {
-    width: 95vw;
+    width: 98vw;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
 }
 
 /* Place the quiz on the page */
@@ -29,8 +29,8 @@ header {
 #highscoreBtn {
     color: purple;
     font-size: 18px;
-    display: flex;
-    justify-content: flex-start;
+    /* display: flex; */
+    /* justify-content: flex-start; */
     /* align-items: left; */
 }
 
@@ -41,7 +41,7 @@ header {
     /* align-items: right; */
     /* display: flex; */
     /* text-align: right; */
-    /* justify-content: space-between; */
+    /* justify-content: flex-end; */
 }
 
 /* Modify button appearance */

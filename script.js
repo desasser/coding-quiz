@@ -16,20 +16,24 @@ var quiz = document.getElementsByClassName("quiz");
         //TODO: If the answer is wrong, subtract 10 seconds from the timer
     //TODO: Display the next question and beneath the answers, display whether the previous answer was right or wrong
     //TODO: BONUS: Track the number of right and wrong answers
-    console.log(btnClick);
 
 var secondsLeft = 5;
+
 
 //Initialize and increment timer
 function setTime() {
     var timerInterval = setInterval(function () {
         secondsLeft--;
-        timeEl.textContent = secondsLeft;
+        timeDisplay.textContent = "Time: " + secondsLeft;
+        //better way to style this by referencing the css sheet somehow?
+        timeDisplay.style.fontFamily = "Arial, Helvetica, sans-serif";
+        timeDisplay.style.fontSize = "18px";
+        timeDisplay.style.fontWeight = "bold";
+        
     if (secondsLeft === 0) {
         clearInterval(timerInterval);
         gameOver();
-    }
-    console.log(secondsLeft);
+    };
     }, 1000);
 };
 
@@ -40,8 +44,11 @@ function gameOver() {
 
 btnClick.addEventListener("click", function(event) {
     event.preventDefault();
+    timeDisplay.textContent = "Time: " + secondsLeft;
+    timeDisplay.style.fontFamily = "Arial, Helvetica, sans-serif";
+    timeDisplay.style.fontSize = "18px";
+    timeDisplay.style.fontWeight = "bold";
     setTime();
-    console.log('click');
 });
 
 //TODO: When timer reaches 0 or all questions have been answered, the quiz ends
@@ -52,7 +59,13 @@ btnClick.addEventListener("click", function(event) {
     //TODO: When clicked, takes the user back to the main display to start the quiz again
 //TODO: Display a button to 'Clear Highscores'
     //TODO: When clicked, clears the highscores list, otherwise they will be saved for the next time the quiz is finished
+
+
 //TODO: Button should display in top left corner to view highscores
+highscoreBtn.addEventListener("click", function(event) {
+    event.preventDefault();
+
+})
 
 
 //TODO: Finish Up
