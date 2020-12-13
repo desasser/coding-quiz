@@ -95,7 +95,7 @@ function nextQuestion(index) {
         //Index is the indicator for the question and answer set
         //So I want to access answerArr[index] and render the answers
         
-        for (var i = 0; i < answerArr.length; i++) {
+        for (var i = 0; i < answersOne.length; i++) {
             var liEl = document.createElement("li");
             // liEl.textContent = i+1 + ". " + answersOne[i];
             console.log(liEl);
