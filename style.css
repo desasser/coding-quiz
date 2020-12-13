@@ -54,3 +54,10 @@ header {
     width: 150px;
     border:none;
 }
+
+#answers {
+    width:40vw;
+    margin: 0 auto;
+    list-style: none;
+    text-align: left;
+}
