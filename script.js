@@ -64,7 +64,7 @@ var answersOne = ["strings", "boolean", "numbers", "alerts"];
 var answersTwo = [":",  ";", "}", "none"];
 var answersThree = ["click", "submit", "keydown", "right-click"];
 var answersFour = ["Paired Data", "Alphabets", "Zoo Animals", "People's Souls"];
-var answerArr = [answersOne, answersFour, answersThree, answersFour];
+var answerArr = [answersOne, answersTwo, answersThree, answersFour];
 
 
 // var question1 = "this is my question"
@@ -78,19 +78,28 @@ var answerArr = [answersOne, answersFour, answersThree, answersFour];
 
 
 //TODO: Display end of game screen
+//TODO: Stop timer and display remainder as score
 function gameOver() {
     headerDisplay.textContent = "Game Over!";
-    btnClick.style.display = "none";
+    answersEl.textContent = "";
+    pText.textContent = "Your Score: " + secondsLeft;
+    pText.style.fontFamily = "Arial, Helvetica, sans-serif";
+    pText.style.fontSize = "18px";
+    pText.style.fontWeight = "bold";
+    //TODO: Stop timer and clear
+    // clearInterval(timerInterval);
+    // timeDisplay.textContent = "";
 }
 
-//TODO: Clear the previous screen and post the next question with answers
+//Clear the previous screen and post the next question with answers
 function nextQuestion(index) {
     if (index < questionArr.length) {
         headerDisplay.textContent = questionArr[index];
         headerDisplay.style.fontSize = "30px";
         pText.textContent = "";
         btnClick.style.display = "none";
-        //TODO: Change this block to loop through an array containing arrays
+        answersEl.textContent = "";
+        //Change this block to loop through an array containing arrays
         
         //Index is the indicator for the question and answer set
         //So I want to access answerArr[index] and render the answers
@@ -108,7 +117,7 @@ function nextQuestion(index) {
             buttonToo.style.fontSize = "20px";
             buttonToo.style.margin = "5px";
             buttonToo.style.height = "50px";
-            buttonToo.style.width = "150px";
+            buttonToo.style.width = "250px";
             buttonToo.style.borderRadius = "0.25em";
             buttonToo.style.border = "none";
             buttonToo.style.textAlign = "left";
