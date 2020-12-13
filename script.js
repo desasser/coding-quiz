@@ -79,7 +79,7 @@ var answerArr = [answersOne, answersFour, answersThree, answersFour];
 
 //TODO: Display end of game screen
 function gameOver() {
-    headerDisplay.textContent = "Game Over";
+    headerDisplay.textContent = "Game Over!";
     btnClick.style.display = "none";
 }
 
@@ -95,12 +95,13 @@ function nextQuestion(index) {
         //Index is the indicator for the question and answer set
         //So I want to access answerArr[index] and render the answers
         
-        for (var i = 0; i < answersOne.length; i++) {
+        for (var i = 0; i < answerArr[index].length; i++) {
             var liEl = document.createElement("li");
             // liEl.textContent = i+1 + ". " + answersOne[i];
             console.log(liEl);
+            var currentAnswers = answerArr[index];
             var buttonToo = document.createElement("button");
-            buttonToo.textContent = i+1 + ". " + answersOne[i];
+            buttonToo.textContent = i+1 + ". " + currentAnswers[i];
     
             //TODO: BONUS BONUS BONUS: Can I call a css style here? Set Attribute?
             buttonToo.style.backgroundColor = "#bada55";
@@ -140,6 +141,7 @@ answersEl.addEventListener("click", function(event) {
     nextQuestion(btnCounter);
     btnCounter++;
     console.log(btnCounter);
+    // console.log('clik');
 });
 
 
