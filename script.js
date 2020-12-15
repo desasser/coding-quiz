@@ -7,8 +7,27 @@ var btnClick = document.getElementById("button-click");
 var timeEl = document.getElementById("timer");
 var answersEl = document.getElementById("answers");
 var feedbackEl = document.getElementById("feedback");
-//Need to confirm getElementsByClassName works here or switch to getElementsById
 var quiz = document.getElementsByClassName("quiz");
+
+//Declare question arrays
+var questionArr = ["Commonly used data types do not include:", "In Javascript, what symbol do you need at the end of each line?", "Which of the below is not an event listener:", "Objects in javascript are used to store what kind of data?"];
+
+//Declare answer arrays
+var answersOne = ["strings", "numbers", "alerts", "boolean"];
+var answersTwo = [":", "none", "}", ";"];
+var answersThree = ["click", "submit", "keydown", "right-click"];
+var answersFour = ["Paired Data", "Alphabets", "Zoo Animals", "People's Souls"];
+var answerArr = [answersOne, answersTwo, answersThree, answersFour];
+var correctAnswers = ["alerts", "none", "right-click", "paired data"]
+
+//Declare p-tag for answer feedback and tracking
+var newP = document.createElement("p");
+var newRule = document.createElement("hr");
+
+//Declare counters
+var answerCount = 0;
+var secondsLeft = 60;
+var btnCounter = 0;
 
 // TODO: BONUS BONUS BONUS: Make this work with an object
 // var objectQA = {
@@ -32,8 +51,7 @@ var quiz = document.getElementsByClassName("quiz");
 
 //TODO: BONUS: Track the number of right and wrong answers
 
-var secondsLeft = 100;
-var btnCounter = 0;
+
 
 
 //Initialize and increment timer
@@ -47,29 +65,14 @@ function setTime() {
         timeDisplay.style.fontWeight = "bold";
 
         //When timer reaches 0, the quiz ends
-        if (secondsLeft === 0) {
+        if (secondsLeft <= 0) {
             clearInterval(timerInterval);
             gameOver();
         };
     }, 1000);
 };
 
-//Each question should have four multiple choice options, each is a button
 
-//Declare question arrays
-var questionArr = ["Commonly used data types do not include:", "In Javascript, what symbol do you need at the end of each line?", "Which of the below is not an event listener:", "Objects in javascript are used to store what kind of data?"];
-
-//Declare answer arrays
-var answersOne = ["strings", "numbers", "alerts", "boolean"];
-var answersTwo = [":", "none", "}", ";"];
-var answersThree = ["click", "submit", "keydown", "right-click"];
-var answersFour = ["Paired Data", "Alphabets", "Zoo Animals", "People's Souls"];
-var answerArr = [answersOne, answersTwo, answersThree, answersFour];
-var correctAnswers = ["alerts", "none", "right-click", "paired data"]
-//Declare p-tag for answer feedback and tracking
-var newP = document.createElement("p");
-var newRule = document.createElement("hr");
-var answerCount = 0;
 
 // var question1 = "this is my question"
 // var answers1 = ["answer1 answer2 answer3 answer4"]
@@ -100,7 +103,6 @@ function gameOver() {
     //TODO: Format to -- Your Initials: Input
     var newInput = document.createElement("input");
     newInput.setAttribute('type', 'text');
-    newInput.setAttribute('placeholder', 'Your Initials');
     feedbackEl.textContent = "Your Initials: ";
     feedbackEl.appendChild(newInput);
 }
@@ -167,43 +169,31 @@ answersEl.addEventListener("click", function (event) {
     //     }        
     // }
 
-    //TODO: Still can't target clicked button
-    console.log("Button Value", event.target.textContent);
-    //Question 1
-    //Check if the button clicked is 'alerts'
-    //Button value is 3. alerts
-    //Options are force the equation to evaluate 3. alerts, change the answer list to populate numbers and array (instead of combining the two in a single button), or split the strings out into two components
-
-    //TODO: Improve the efficiency of this code?
-    var checkAnswer = event.target.textContent.split(" ")[1];
-    console.log(checkAnswer);
-    if (checkAnswer === "alerts") {
-        answerCount++;
-        newP.textContent = `Correct! You have answered ${answerCount} questions correctly!`;
-    } else {
-        secondsLeft -= 10;
-        newP.textContent = `Wrong! You have answered ${answerCount} questions correctly!`;
-    }
 
     //If button is clicked, then proceed
     var element = event.target;
 
     if (element.matches("button") === true) {
+        //TODO: Improve the efficiency of this code?
+        //Checks the answer from the user clicking the button against the answer array
+        var checkAnswer = event.target.textContent.split(" ")[1];
+        console.log(checkAnswer);
+        if (checkAnswer === correctAnswers[btnCounter - 1]) {
+            answerCount++;
+            newP.textContent = `Correct! You have answered ${answerCount} questions correctly!`;
+        } else {
+            secondsLeft -= 10;
+            newP.textContent = `Wrong! You have answered ${answerCount} questions correctly!`;
+        }
+        console.log("Button Value", event.target.textContent);
         //Wipe off the screen when clicked and update with next question or gameover screen
         nextQuestion(btnCounter);
         btnCounter++;
-        //Append below the answer list
+        //Append feedback on correct or wrong answers below the answer list
         feedbackEl.appendChild(newRule);
         feedbackEl.appendChild(newP);
+        console.log('Button Counter', btnCounter);
     }
-
-
-
-
-
-
-    // console.log(btnCounter);
-    // console.log('clik');
 });
 
 
