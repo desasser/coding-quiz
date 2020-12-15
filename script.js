@@ -30,9 +30,14 @@ var answerCount = 0;
 var secondsLeft = 60;
 var btnCounter = 0;
 
+//declare high score variables
+var highscoreInit = [];
+
 //Initialize and increment timer
+var timerInterval;
+
 function setTime() {
-    var timerInterval = setInterval(function () {
+    timerInterval = setInterval(function () {
         secondsLeft--;
         timeDisplay.textContent = "Time: " + secondsLeft;
 
@@ -40,7 +45,6 @@ function setTime() {
 
         //When timer reaches 0, the quiz ends
         if (secondsLeft <= 0) {
-            clearInterval(timerInterval);
             gameOver();
         };
     }, 1000);
@@ -49,6 +53,7 @@ function setTime() {
 //TODO: Display end of game screen
 //TODO: Stop timer and display remainder as score
 function gameOver() {
+    clearInterval(timerInterval);
     headerDisplay.textContent = "Game Over!";
     answersEl.textContent = "";
     pText.textContent = "Your Score: " + secondsLeft;
@@ -59,14 +64,28 @@ function gameOver() {
     pText.setAttribute("id", "timeDisplay");
     //TODO: Stop timer and clear
     // clearInterval(timerInterval);
-    // timeDisplay.textContent = "";
+    //TODO: Kills the timer for a second but then comes back
+    //send a variable to setTime that is true/false and tells it to stop running?
+    timeDisplay.textContent = "";
 
-
-    //TODO: Format to -- Your Initials: Input
     var newInput = document.createElement("input");
     newInput.setAttribute('type', 'text');
     feedbackEl.textContent = "Your Initials: ";
     feedbackEl.appendChild(newInput);
+
+    newInput.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        var userInitials = newInput.value.trim();
+        if (newInput ==="") {
+            return;
+        }
+
+        highscoreInit.push(userInitials);
+        newInput = "";
+
+        //TODO: add highscore initials to page
+    })
 }
 
 //Clear the previous screen and post the next question with answers
