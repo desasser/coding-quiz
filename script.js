@@ -50,8 +50,8 @@ function setTime() {
     }, 1000);
 };
 
-//TODO: Display end of game screen
-//TODO: Stop timer and display remainder as score
+//Display end of game screen
+//Stop timer and display remainder as score
 function gameOver() {
     clearInterval(timerInterval);
     headerDisplay.textContent = "Game Over!";
@@ -62,10 +62,6 @@ function gameOver() {
     newP.style.visibility = "hidden";
     //TODO: can I set position here?
     pText.setAttribute("id", "timeDisplay");
-    //TODO: Stop timer and clear
-    // clearInterval(timerInterval);
-    //TODO: Kills the timer for a second but then comes back
-    //send a variable to setTime that is true/false and tells it to stop running?
     timeDisplay.textContent = "";
 
     var newInput = document.createElement("input");
@@ -134,30 +130,17 @@ btnClick.addEventListener("click", function (event) {
 });
 
 
-//TODO: Click buttons not list
+//Click buttons not list
 answersEl.addEventListener("click", function (event) {
     event.preventDefault();
 
-    //TODO: Display the next question and beneath the answers, display whether the previous answer was right or wrong    
-    //Conditional to evaluate right or wrong answer
-    //TODO: How do I target the button clicked?
-    // for (let i = 0; i < correctAnswers.length; i++) {
-    //     var newDiv = document.createElement("div");
-    //     if (correctAnswers[i].matches(this)) {
-    //         newDiv.textContent = "Correct!";
-    //     } else {
-    //         newDiv.textContent = "Wrong!";
-    //     }        
-    // }
-
+    //Display the next question and beneath the answers, display whether the previous answer was right or wrong    
     //If button is clicked, then proceed
     var element = event.target;
 
     if (element.matches("button") === true) {
-        //TODO: Improve the efficiency of this code?
         //Checks the answer from the user clicking the button against the answer array
         var checkAnswer = event.target.textContent.split(" ")[1];
-        // console.log(checkAnswer);
         if (checkAnswer === correctAnswers[btnCounter - 1]) {
             answerCount++;
             newP.textContent = `Correct! You have answered ${answerCount} questions correctly!`;
@@ -165,7 +148,6 @@ answersEl.addEventListener("click", function (event) {
             secondsLeft -= 10;
             newP.textContent = `Wrong! You have answered ${answerCount} questions correctly!`;
         }
-        // console.log("Button Value", event.target.textContent);
         //Wipe off the screen when clicked and update with next question or gameover screen
         nextQuestion(btnCounter);
         btnCounter++;
