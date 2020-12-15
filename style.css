@@ -16,6 +16,15 @@ header {
     justify-content: space-between;
 }
 
+input {
+    height: 50px;
+    width: 100%;
+    padding: 6px;
+    margin-top: 10px;
+    font-size: 2.4em;
+    border: none;
+}
+
 /* Place the quiz on the page */
 .quiz {
     margin-top: 10vh;
@@ -29,18 +38,12 @@ header {
     line-height: 1.3em;
 }
 
-input {
-    height: 50px;
-    width: 100%;
-    padding: 6px;
-    margin-top: 10px;
-    font-size: 2.4em;
-    border: none;
-  }
-
 #feedback {
     width:60vw;
     margin: 0 auto;
+    text-Align: center;
+    font-Size: 24px;
+    font-Family: Arial, Helvetica, sans-serif;
 }
 /* View Highscores button, upper left corner */
 #highscoreBtn {
@@ -53,12 +56,9 @@ input {
 
 /* Time, upper right corner */
 #timeDisplay {
-    /* justify-content: right; */
-    /* margin-left: 60vw; */
-    /* align-items: right; */
-    /* display: flex; */
-    /* text-align: right; */
-    /* justify-content: flex-end; */
+    font-Family: Arial, Helvetica, sans-serif;
+    font-Size: 18px;
+    font-Weight: bold;
 }
 
 /* Modify button appearance */

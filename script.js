@@ -25,12 +25,12 @@ var quiz = document.getElementsByClassName("quiz");
 // }
 
 //When the button is clicked, start a timer for 100 seconds and present the first question
-    //Timer should display in top right corner, counting down
-    
-    //TODO: When a button is clicked, check the answer corresponding to the button against the correct answer to the question
-        //TODO: If the answer is wrong, subtract 10 seconds from the timer
+//Timer should display in top right corner, counting down
 
-    //TODO: BONUS: Track the number of right and wrong answers
+//TODO: When a button is clicked, check the answer corresponding to the button against the correct answer to the question
+//TODO: If the answer is wrong, subtract 10 seconds from the timer
+
+//TODO: BONUS: Track the number of right and wrong answers
 
 var secondsLeft = 100;
 var btnCounter = 0;
@@ -45,12 +45,12 @@ function setTime() {
         timeDisplay.style.fontFamily = "Arial, Helvetica, sans-serif";
         timeDisplay.style.fontSize = "18px";
         timeDisplay.style.fontWeight = "bold";
-        
-    //When timer reaches 0, the quiz ends
-    if (secondsLeft === 0) {
-        clearInterval(timerInterval);
-        gameOver();
-    };
+
+        //When timer reaches 0, the quiz ends
+        if (secondsLeft === 0) {
+            clearInterval(timerInterval);
+            gameOver();
+        };
     }, 1000);
 };
 
@@ -61,7 +61,7 @@ var questionArr = ["Commonly used data types do not include:", "In Javascript, w
 
 //Declare answer arrays
 var answersOne = ["strings", "numbers", "alerts", "boolean"];
-var answersTwo = [":",  "none", "}", ";"];
+var answersTwo = [":", "none", "}", ";"];
 var answersThree = ["click", "submit", "keydown", "right-click"];
 var answersFour = ["Paired Data", "Alphabets", "Zoo Animals", "People's Souls"];
 var answerArr = [answersOne, answersTwo, answersThree, answersFour];
@@ -90,10 +90,8 @@ function gameOver() {
     //Turn off hr and answer feedback
     newRule.style.visibility = "hidden";
     newP.style.visibility = "hidden";
-    //TODO: BONUS BONUS: Styling via CSS block?
-    pText.style.fontFamily = "Arial, Helvetica, sans-serif";
-    pText.style.fontSize = "18px";
-    pText.style.fontWeight = "bold";
+    //TODO: can I set position here?
+    pText.setAttribute("id", "timeDisplay");
     //TODO: Stop timer and clear
     // clearInterval(timerInterval);
     // timeDisplay.textContent = "";
@@ -103,6 +101,7 @@ function gameOver() {
     var newInput = document.createElement("input");
     newInput.setAttribute('type', 'text');
     newInput.setAttribute('placeholder', 'Your Initials');
+    feedbackEl.textContent = "Your Initials: ";
     feedbackEl.appendChild(newInput);
 }
 
@@ -116,37 +115,34 @@ function nextQuestion(index) {
         btnClick.style.display = "none";
         answersEl.textContent = "";
         //Change this block to loop through an array containing arrays
-        
+
         //Index is the indicator for the question and answer set
         //So I want to access answerArr[index] and render the answers
-        
+        //Create buttons
         for (var i = 0; i < answerArr[index].length; i++) {
             var liEl = document.createElement("li");
             // liEl.textContent = i+1 + ". " + answersOne[i];
             // console.log(liEl);
             var currentAnswers = answerArr[index];
             var buttonToo = document.createElement("button");
-            buttonToo.textContent = i+1 + ". " + currentAnswers[i];
+            buttonToo.textContent = i + 1 + ". " + currentAnswers[i];
             // buttonToo.setAttribute("value", answerArr[i]);
-    
-            buttonToo.setAttribute("class","btnFlavor")
 
-    
+            buttonToo.setAttribute("class", "btnFlavor")
+
+
             liEl.appendChild(buttonToo);
-            answersEl.appendChild(liEl);    
-        } 
+            answersEl.appendChild(liEl);
+        }
     } else {
         gameOver();
     }
 }
 
-btnClick.addEventListener("click", function(event) {
+btnClick.addEventListener("click", function (event) {
     event.preventDefault();
     timeDisplay.textContent = "Time: " + secondsLeft;
-    //TODO: Style in CSS
-    timeDisplay.style.fontFamily = "Arial, Helvetica, sans-serif";
-    timeDisplay.style.fontSize = "18px";
-    timeDisplay.style.fontWeight = "bold";
+    timeDisplay.setAttribute("id", "timeDisplay");
     setTime();
     //Wipe off the screen when clicked
     nextQuestion(btnCounter);
@@ -155,8 +151,8 @@ btnClick.addEventListener("click", function(event) {
 });
 
 
-
-answersEl.addEventListener("click", function(event) {
+//TODO: Click buttons not list
+answersEl.addEventListener("click", function (event) {
     event.preventDefault();
 
     //TODO: Display the next question and beneath the answers, display whether the previous answer was right or wrong    
@@ -170,30 +166,42 @@ answersEl.addEventListener("click", function(event) {
     //         newDiv.textContent = "Wrong!";
     //     }        
     // }
-    
+
     //TODO: Still can't target clicked button
-    console.log("Button Value", this.value);
-    if (this.value === "alerts") {
+    console.log("Button Value", event.target.textContent);
+    //Question 1
+    //Check if the button clicked is 'alerts'
+    //Button value is 3. alerts
+    //Options are force the equation to evaluate 3. alerts, change the answer list to populate numbers and array (instead of combining the two in a single button), or split the strings out into two components
+
+    //TODO: Improve the efficiency of this code?
+    var checkAnswer = event.target.textContent.split(" ")[1];
+    console.log(checkAnswer);
+    if (checkAnswer === "alerts") {
         answerCount++;
         newP.textContent = `Correct! You have answered ${answerCount} questions correctly!`;
     } else {
-        secondsLeft-=10;
+        secondsLeft -= 10;
         newP.textContent = `Wrong! You have answered ${answerCount} questions correctly!`;
     }
-   
 
-    //TODO: Style this via class attribute
-    newP.style.textAlign = "center";
-    newP.style.fontSize = "24px";
-    newP.style.fontFamily = "Arial, Helvetica, sans-serif";
+    //If button is clicked, then proceed
+    var element = event.target;
 
-    //Append below the answer list
-    feedbackEl.appendChild(newRule);
-    feedbackEl.appendChild(newP);
+    if (element.matches("button") === true) {
+        //Wipe off the screen when clicked and update with next question or gameover screen
+        nextQuestion(btnCounter);
+        btnCounter++;
+        //Append below the answer list
+        feedbackEl.appendChild(newRule);
+        feedbackEl.appendChild(newP);
+    }
 
-    //Wipe off the screen when clicked
-    nextQuestion(btnCounter);
-    btnCounter++;
+
+
+
+
+
     // console.log(btnCounter);
     // console.log('clik');
 });
@@ -201,16 +209,16 @@ answersEl.addEventListener("click", function(event) {
 
 
 //TODO: When the quiz ends, display your score and display input for initals to save the highscore into a list
-    //TODO: BONUS: Display the total number of right and wrong answers
-    //TODO: BONUS BONUS: Display the questions that were answered wrong and their correct answers against what was answered
+//TODO: BONUS: Display the total number of right and wrong answers
+//TODO: BONUS BONUS: Display the questions that were answered wrong and their correct answers against what was answered
 //TODO: Display a button to 'Go Back' to the beginning of the quiz and try again
-    //TODO: When clicked, takes the user back to the main display to start the quiz again
+//TODO: When clicked, takes the user back to the main display to start the quiz again
 //TODO: Display a button to 'Clear Highscores'
-    //TODO: When clicked, clears the highscores list, otherwise they will be saved for the next time the quiz is finished
+//TODO: When clicked, clears the highscores list, otherwise they will be saved for the next time the quiz is finished
 
 
 //TODO: Button should display in top left corner and direct to view highscores
-highscoreBtn.addEventListener("click", function(event) {
+highscoreBtn.addEventListener("click", function (event) {
     event.preventDefault();
     console.log('click');
 
