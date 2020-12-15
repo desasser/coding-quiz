@@ -7,6 +7,7 @@ var btnClick = document.getElementById("button-click");
 var timeEl = document.getElementById("timer");
 var answersEl = document.getElementById("answers");
 var feedbackEl = document.getElementById("feedback");
+//broken?
 var quiz = document.getElementsByClassName("quiz");
 
 //Declare question arrays
@@ -29,40 +30,13 @@ var answerCount = 0;
 var secondsLeft = 60;
 var btnCounter = 0;
 
-// TODO: BONUS BONUS BONUS: Make this work with an object
-// var objectQA = {
-//     "Q1": ["Q1A1, Q1A2, Q1A3, Q1A4"],
-//     "Q2": ["Q2A2, Q2A2, Q2A3, Q2A4"],
-//     "Q3": ["Q3A3, Q3A2, Q3A3, Q3A4"],
-//     "Q4": ["Q4A4, Q4A2, Q4A3, Q4A4"]
-//  }
-// console.log(objectQA.Q1);
-// console.log("length", objectQA.Q1.length);
-// for (var i = 0; i < objectQA.Q1.length; i++) {
-//    var test = objectQA.Q1
-//    console.log('Entry', i, test);   
-// }
-
-//When the button is clicked, start a timer for 100 seconds and present the first question
-//Timer should display in top right corner, counting down
-
-//TODO: When a button is clicked, check the answer corresponding to the button against the correct answer to the question
-//TODO: If the answer is wrong, subtract 10 seconds from the timer
-
-//TODO: BONUS: Track the number of right and wrong answers
-
-
-
-
 //Initialize and increment timer
 function setTime() {
     var timerInterval = setInterval(function () {
         secondsLeft--;
         timeDisplay.textContent = "Time: " + secondsLeft;
-        //TODO: BONUS BONUS: Styling via CSS block?
-        timeDisplay.style.fontFamily = "Arial, Helvetica, sans-serif";
-        timeDisplay.style.fontSize = "18px";
-        timeDisplay.style.fontWeight = "bold";
+
+        timeDisplay.setAttribute("id", "timeDisplay");
 
         //When timer reaches 0, the quiz ends
         if (secondsLeft <= 0) {
@@ -71,18 +45,6 @@ function setTime() {
         };
     }, 1000);
 };
-
-
-
-// var question1 = "this is my question"
-// var answers1 = ["answer1 answer2 answer3 answer4"]
-
-// if (buttonClickedOn === "Daniel") {
-//     go on to the next question
-// } else {
-//     timer = -10seconds;
-// }
-
 
 //TODO: Display end of game screen
 //TODO: Stop timer and display remainder as score
@@ -169,7 +131,6 @@ answersEl.addEventListener("click", function (event) {
     //     }        
     // }
 
-
     //If button is clicked, then proceed
     var element = event.target;
 
@@ -177,7 +138,7 @@ answersEl.addEventListener("click", function (event) {
         //TODO: Improve the efficiency of this code?
         //Checks the answer from the user clicking the button against the answer array
         var checkAnswer = event.target.textContent.split(" ")[1];
-        console.log(checkAnswer);
+        // console.log(checkAnswer);
         if (checkAnswer === correctAnswers[btnCounter - 1]) {
             answerCount++;
             newP.textContent = `Correct! You have answered ${answerCount} questions correctly!`;
@@ -185,18 +146,23 @@ answersEl.addEventListener("click", function (event) {
             secondsLeft -= 10;
             newP.textContent = `Wrong! You have answered ${answerCount} questions correctly!`;
         }
-        console.log("Button Value", event.target.textContent);
+        // console.log("Button Value", event.target.textContent);
         //Wipe off the screen when clicked and update with next question or gameover screen
         nextQuestion(btnCounter);
         btnCounter++;
         //Append feedback on correct or wrong answers below the answer list
         feedbackEl.appendChild(newRule);
         feedbackEl.appendChild(newP);
-        console.log('Button Counter', btnCounter);
+        // console.log('Button Counter', btnCounter);
     }
 });
 
+//TODO: Button should display in top left corner and direct to view highscores
+highscoreBtn.addEventListener("click", function (event) {
+    event.preventDefault();
+    console.log('click');
 
+})
 
 //TODO: When the quiz ends, display your score and display input for initals to save the highscore into a list
 //TODO: BONUS: Display the total number of right and wrong answers
@@ -206,14 +172,27 @@ answersEl.addEventListener("click", function (event) {
 //TODO: Display a button to 'Clear Highscores'
 //TODO: When clicked, clears the highscores list, otherwise they will be saved for the next time the quiz is finished
 
+// TODO: BONUS BONUS BONUS: Make this work with an object
+// var objectQA = {
+//     "Q1": ["Q1A1, Q1A2, Q1A3, Q1A4"],
+//     "Q2": ["Q2A2, Q2A2, Q2A3, Q2A4"],
+//     "Q3": ["Q3A3, Q3A2, Q3A3, Q3A4"],
+//     "Q4": ["Q4A4, Q4A2, Q4A3, Q4A4"]
+//  }
+// console.log(objectQA.Q1);
+// console.log("length", objectQA.Q1.length);
+// for (var i = 0; i < objectQA.Q1.length; i++) {
+//    var test = objectQA.Q1
+//    console.log('Entry', i, test);   
+// }
 
-//TODO: Button should display in top left corner and direct to view highscores
-highscoreBtn.addEventListener("click", function (event) {
-    event.preventDefault();
-    console.log('click');
+//When the button is clicked, start a timer for 100 seconds and present the first question
+//Timer should display in top right corner, counting down
 
-})
+//TODO: When a button is clicked, check the answer corresponding to the button against the correct answer to the question
+//TODO: If the answer is wrong, subtract 10 seconds from the timer
 
+//TODO: BONUS: Track the number of right and wrong answers
 
 //TODO: Finish Up
 //TODO: Deploy
