@@ -11,15 +11,15 @@ var feedbackEl = document.getElementById("feedback");
 var quiz = document.getElementsByClassName("quiz");
 
 //Declare question arrays
-var questionArr = ["Commonly used data types do not include:", "In Javascript, what symbol do you need at the end of each line?", "Which of the below is not an event listener:", "Objects in javascript are used to store what kind of data?"];
+var questionArr = ["Which of the below heroes is not from Damacia?", "Who freed Sylas from the mageseeker compound?", "What race are Veigar, Rumble, and Poppy?", "Where is Miss Fortune from?"];
 
 //Declare answer arrays
-var answersOne = ["strings", "numbers", "alerts", "boolean"];
-var answersTwo = [":", "none", "}", ";"];
-var answersThree = ["click", "submit", "keydown", "right-click"];
-var answersFour = ["Paired Data", "Alphabets", "Zoo Animals", "People's Souls"];
+var answersOne = ["Fiora", "Shyvana", "Poppy", "Darius"];
+var answersTwo = ["Senna", "Lux", "Swain", "Bard"];
+var answersThree = ["Yordle", "Human", "Vastayan", "Golem"];
+var answersFour = ["Noxus", "Ionia", "Piltover", "Bilgewater"];
 var answerArr = [answersOne, answersTwo, answersThree, answersFour];
-var correctAnswers = ["alerts", "none", "right-click", "paired data"]
+var correctAnswers = ["Darius", "Lux", "Yordle", "Bilgewater"]
 
 //Declare p-tag for answer feedback and tracking
 var newP = document.createElement("p");
@@ -30,10 +30,10 @@ var answerCount = 0;
 var secondsLeft = 60;
 var btnCounter = 0;
 
-//declare high score variables
-var highscoreInit = [];
+//Declare high score variables
+var hsArr = JSON.parse(localStorage.getItem("gameData")) || [];
 
-//Initialize and increment timer
+//Declare timer variable
 var timerInterval;
 
 function setTime() {
@@ -56,33 +56,67 @@ function gameOver() {
     clearInterval(timerInterval);
     headerDisplay.textContent = "Game Over!";
     answersEl.textContent = "";
+
     pText.textContent = "Your Score: " + secondsLeft;
     //Turn off hr and answer feedback
-    newRule.style.visibility = "hidden";
-    newP.style.visibility = "hidden";
-    //TODO: can I set position here?
-    pText.setAttribute("id", "timeDisplay");
+    // newRule.style.visibility = "hidden";
+    // newP.style.visibility = "hidden";
+    
+    pText.setAttribute("class", "fontFun");
     timeDisplay.textContent = "";
 
     var newInput = document.createElement("input");
     newInput.setAttribute('type', 'text');
     feedbackEl.textContent = "Your Initials: ";
     feedbackEl.appendChild(newInput);
+    var newBtn = document.createElement("button");
+    newBtn.textContent = "SUBMIT";
+    newBtn.setAttribute('class','btnFlavor');
+    feedbackEl.appendChild(newBtn);
 
-    newInput.addEventListener("submit", function(event) {
+    newBtn.addEventListener("click", function(event) {
         event.preventDefault();
 
-        var userInitials = newInput.value.trim();
-        if (newInput ==="") {
+        var hsObj = {
+        initials: newInput.value.trim(),
+        score: secondsLeft
+        }
+        // console.log(hsObj);
+        if (newInput.value === '') {
             return;
         }
 
-        highscoreInit.push(userInitials);
-        newInput = "";
+        hsArr.push(hsObj);
+        newInput.value = "";
 
-        //TODO: add highscore initials to page
+        // console.log(hsArr);
+        // console.log(JSON.stringify(hsArr));
+        localStorage.setItem("gameData",JSON.stringify(hsArr));
+
+        for (var i = 0; i < hsArr.length; i++) {
+            var liElToo = document.createElement("li");
+            liElToo.textContent = `Player: ${hsArr[i].initials} Score: ${hsArr[i].score}`;
+            liElToo.setAttribute("class","fontFun");
+
+            //Sort array by highest to lowest
+
+            if (i % 2 === 0) {
+                liElToo.setAttribute('class', 'evenFlavor');
+            } else {
+                liElToo.setAttribute('class', 'oddFlavor');
+            }         
+            answersEl.appendChild(liElToo);
+        }
+        
+        //TODO: order the highscores
+        //TODO: replace the input with a button to start the game over
+        //TODO: reset counters
+        //TODO: options - windows refresh, a-tag with original link, or move everything into a function to 'startQuiz'
+        //TODO: check to confirm timer is working properly
     })
 }
+
+
 
 //Clear the previous screen and post the next question with answers
 function nextQuestion(index) {
@@ -148,8 +182,13 @@ answersEl.addEventListener("click", function (event) {
             secondsLeft -= 10;
             newP.textContent = `Wrong! You have answered ${answerCount} questions correctly!`;
         }
+        setTimeout(function(){ 
+            newP.textContent = ''; 
+            newRule.style.display = 'none';
+        }, 1500);
         //Wipe off the screen when clicked and update with next question or gameover screen
         nextQuestion(btnCounter);
+        console.log(event.target.textContent.split(" ")[1]);
         btnCounter++;
         //Append feedback on correct or wrong answers below the answer list
         feedbackEl.appendChild(newRule);
@@ -159,8 +198,17 @@ answersEl.addEventListener("click", function (event) {
 });
 
 //TODO: Button should display in top left corner and direct to view highscores
+//TODO: Format the button
 highscoreBtn.addEventListener("click", function (event) {
     event.preventDefault();
+
+    answersEl.innerHTML = '';
+    for (var i = 0; i < hsArr.length; i++) {
+        var liElToo = document.createElement("li");
+        liElToo.textContent = `Player: ${hsArr[i].initials} Score: ${hsArr[i].score}`;
+        answersEl.appendChild(liElToo);           
+    }
+    
     console.log('click');
 
 })

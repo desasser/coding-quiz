@@ -1,6 +1,9 @@
 body {
     font-family: Arial, Helvetica, sans-serif;    
-    background: rgb(123, 155, 241);
+    margin: 0;
+    padding: 0;
+    background: lightgray;
+    
 }
 
 h1 {
@@ -11,9 +14,11 @@ h1 {
 }
 
 header {
-    width: 98vw;
+    width: 100vw;
+    height: 10vh;
     display: flex;
     justify-content: space-between;
+    background-color: black;
 }
 
 input {
@@ -48,7 +53,8 @@ input {
 }
 /* View Highscores button, upper left corner */
 #highscoreBtn {
-    color: purple;
+    padding-top: 3vh;
+    color: white;
     font-size: 18px;
     /* display: flex; */
     /* justify-content: flex-start; */
@@ -57,14 +63,43 @@ input {
 
 /* Time, upper right corner */
 #timeDisplay {
+    padding-top: 3vh;
+    font-Family: Arial, Helvetica, sans-serif;
+    font-Size: 18px;
+    font-Weight: bold;
+    color: white;
+}
+
+.fontFun {
     font-Family: Arial, Helvetica, sans-serif;
     font-Size: 18px;
     font-Weight: bold;
 }
 
+.evenFlavor {
+    background-color: grey;
+    color: white;
+    width:30vw;
+    line-height: 1.5em;
+    font-size: 18px;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.oddFlavor {
+    background-color: whitesmoke;
+    width:30vw;
+    line-height: 1.5em;
+    font-size: 18px;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
 /* Modify button appearance */
 .btnFlavor {
-    background-color: #bada55;
+    background-color: cadetblue;
     border-radius: 0.5em;
     font-size: 20px;
     margin: 10px;
