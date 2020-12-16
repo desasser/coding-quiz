@@ -21,7 +21,11 @@
 * Display the final score and accept user input for initials
 * Save initials and score, displaying the score
 
+<br />
+
 ## Skills practiced: Javascript (functions, methods, dom manipulation, objects, timers)
+
+<br />
 
 ## Bonus Functionality:
 * Highscores are stored locally and displayed in descending order, using sort functionality
@@ -38,12 +42,12 @@
 * If you would like to retake the quiz, click restart
 * If you would like to clear the previous highscores, click clearscores to wipe out local storage
 
-## Screenshots: 
-<img src="frontPage.jpg" alt="Front page of the LoL quiz">
-<br />
-<img src="quizOne.jpg" alt="Question example">
-<br />
-<img src="gameOver.jpg" alt="Highscore screen">
+## Link: https://desasser.github.io/coding-quiz/
+
 <br />
 
-## Link: https://desasser.github.io/coding-quiz/
+## Screenshot: 
+<img src="frontPage.jpg" alt="Front page of the LoL quiz">
+
+
+
