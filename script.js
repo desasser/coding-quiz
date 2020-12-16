@@ -19,7 +19,7 @@ var answersTwo = ["Senna", "Lux", "Swain", "Bard"];
 var answersThree = ["Yordle", "Human", "Vastayan", "Golem"];
 var answersFour = ["Noxus", "Ionia", "Piltover", "Bilgewater"];
 var answerArr = [answersOne, answersTwo, answersThree, answersFour];
-var correctAnswers = ["Darius", "Lux", "Yordle", "Bilgewater"]
+var correctAnswers = ["Darius", "Lux", "Yordle", "Bilgewater"];
 
 //Declare p-tag for answer feedback and tracking
 var newP = document.createElement("p");
@@ -95,16 +95,25 @@ function gameOver() {
 
         for (var i = 0; i < hsArr.length; i++) {
             var liElToo = document.createElement("li");
-            liElToo.textContent = `Player: ${hsArr[i].initials} Score: ${hsArr[i].score}`;
             liElToo.setAttribute("class","fontFun");
-
+            
             //Sort array by highest to lowest
-
+            function compare(a,b) {
+                var scoreOne = a.score;
+                var scoreTwo = b.score;
+                
+                return scoreTwo-scoreOne;
+            }
+            
+            hsArr.sort(compare);
+            // console.log(hsArr);
+            
             if (i % 2 === 0) {
                 liElToo.setAttribute('class', 'evenFlavor');
             } else {
                 liElToo.setAttribute('class', 'oddFlavor');
             }         
+            liElToo.textContent = `Player: ${hsArr[i].initials} Score: ${hsArr[i].score}`;
             answersEl.appendChild(liElToo);
         }
         
@@ -188,7 +197,7 @@ answersEl.addEventListener("click", function (event) {
         }, 1500);
         //Wipe off the screen when clicked and update with next question or gameover screen
         nextQuestion(btnCounter);
-        console.log(event.target.textContent.split(" ")[1]);
+
         btnCounter++;
         //Append feedback on correct or wrong answers below the answer list
         feedbackEl.appendChild(newRule);
