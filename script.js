@@ -74,6 +74,9 @@ function gameOver() {
     newBtn.setAttribute('class','btnFlavor');
     feedbackEl.appendChild(newBtn);
 
+
+    // used click event on a submit button because I couldn't get the 'submit' event to work, I think due to creating an input dynamically
+    // tried creating a form in the html, but couldn't get submit to work when the enter key was pressed
     newBtn.addEventListener("click", function(event) {
         event.preventDefault();
 
@@ -117,12 +120,23 @@ function gameOver() {
             answersEl.appendChild(liElToo);
         }
         
-        //TODO: order the highscores
+        newInput.style.visibility = "hidden";
+        // feedbackEl.style.visibility = "hidden";
+        feedbackEl.textContent = '';
+        var newBtnAlso = document.createElement("button");
+        newBtnAlso.textContent = "Restart Quiz";
+        newBtnAlso.setAttribute('class', 'btnFlavor');
+        feedbackEl.appendChild(newBtnAlso);
+
+        newBtnAlso.addEventListener("click", function(event) {
+            event.preventDefault();
+            location.reload();
+        });
         //TODO: replace the input with a button to start the game over
         //TODO: reset counters
         //TODO: options - windows refresh, a-tag with original link, or move everything into a function to 'startQuiz'
         //TODO: check to confirm timer is working properly
-    })
+    });
 }
 
 
