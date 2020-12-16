@@ -57,9 +57,6 @@ function gameOver() {
     answersEl.textContent = "";
 
     pText.textContent = "Your Score: " + secondsLeft;
-    //Turn off hr and answer feedback
-    // newRule.style.visibility = "hidden";
-    // newP.style.visibility = "hidden";
 
     pText.setAttribute("class", "fontFun");
     timeDisplay.textContent = "";
@@ -88,13 +85,13 @@ function gameOver() {
         }
 
         hsArr.push(hsObj);
-        newInput.value = "";
+        newInput.value = '';
 
-        localStorage.setItem("gameData", JSON.stringify(hsArr));
+        localStorage.setItem('gameData', JSON.stringify(hsArr));
 
         for (var i = 0; i < hsArr.length; i++) {
-            var liElToo = document.createElement("li");
-            liElToo.setAttribute("class", "fontFun");
+            var liElToo = document.createElement('li');
+            liElToo.setAttribute('class', 'fontFun');
 
             //Sort array by highest to lowest
             function compare(a, b) {
@@ -115,16 +112,15 @@ function gameOver() {
             answersEl.appendChild(liElToo);
         }
 
-        newInput.style.visibility = "hidden";
-        // feedbackEl.style.visibility = "hidden";
+        newInput.style.visibility = 'hidden';
         feedbackEl.textContent = '';
-        var newBtnAlso = document.createElement("button");
-        newBtnAlso.textContent = "Restart Quiz";
+        var newBtnAlso = document.createElement('button');
+        newBtnAlso.textContent = 'Restart Quiz';
         newBtnAlso.setAttribute('class', 'btnFlavor');
         feedbackEl.appendChild(newBtnAlso);
 
         //reset game to beginning, refreshing timer
-        newBtnAlso.addEventListener("click", function (event) {
+        newBtnAlso.addEventListener('click', function (event) {
             event.preventDefault();
             location.reload();
         });
