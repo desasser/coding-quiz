@@ -61,7 +61,7 @@ function gameOver() {
     //Turn off hr and answer feedback
     // newRule.style.visibility = "hidden";
     // newP.style.visibility = "hidden";
-    
+
     pText.setAttribute("class", "fontFun");
     timeDisplay.textContent = "";
 
@@ -71,20 +71,19 @@ function gameOver() {
     feedbackEl.appendChild(newInput);
     var newBtn = document.createElement("button");
     newBtn.textContent = "SUBMIT";
-    newBtn.setAttribute('class','btnFlavor');
+    newBtn.setAttribute('class', 'btnFlavor');
     feedbackEl.appendChild(newBtn);
 
 
     // used click event on a submit button because I couldn't get the 'submit' event to work, I think due to creating an input dynamically
     // tried creating a form in the html, but couldn't get submit to work when the enter key was pressed
-    newBtn.addEventListener("click", function(event) {
+    newBtn.addEventListener("click", function (event) {
         event.preventDefault();
 
         var hsObj = {
-        initials: newInput.value.trim(),
-        score: secondsLeft
+            initials: newInput.value.trim(),
+            score: secondsLeft
         }
-        // console.log(hsObj);
         if (newInput.value === '') {
             return;
         }
@@ -92,34 +91,31 @@ function gameOver() {
         hsArr.push(hsObj);
         newInput.value = "";
 
-        // console.log(hsArr);
-        // console.log(JSON.stringify(hsArr));
-        localStorage.setItem("gameData",JSON.stringify(hsArr));
+        localStorage.setItem("gameData", JSON.stringify(hsArr));
 
         for (var i = 0; i < hsArr.length; i++) {
             var liElToo = document.createElement("li");
-            liElToo.setAttribute("class","fontFun");
-            
+            liElToo.setAttribute("class", "fontFun");
+
             //Sort array by highest to lowest
-            function compare(a,b) {
+            function compare(a, b) {
                 var scoreOne = a.score;
                 var scoreTwo = b.score;
-                
-                return scoreTwo-scoreOne;
+
+                return scoreTwo - scoreOne;
             }
-            
+
             hsArr.sort(compare);
-            // console.log(hsArr);
-            
+
             if (i % 2 === 0) {
                 liElToo.setAttribute('class', 'evenFlavor');
             } else {
                 liElToo.setAttribute('class', 'oddFlavor');
-            }         
+            }
             liElToo.textContent = `Player: ${hsArr[i].initials} Score: ${hsArr[i].score}`;
             answersEl.appendChild(liElToo);
         }
-        
+
         newInput.style.visibility = "hidden";
         // feedbackEl.style.visibility = "hidden";
         feedbackEl.textContent = '';
@@ -128,14 +124,11 @@ function gameOver() {
         newBtnAlso.setAttribute('class', 'btnFlavor');
         feedbackEl.appendChild(newBtnAlso);
 
-        newBtnAlso.addEventListener("click", function(event) {
+        //reset game to beginning, refreshing timer
+        newBtnAlso.addEventListener("click", function (event) {
             event.preventDefault();
             location.reload();
         });
-        //TODO: replace the input with a button to start the game over
-        //TODO: reset counters
-        //TODO: options - windows refresh, a-tag with original link, or move everything into a function to 'startQuiz'
-        //TODO: check to confirm timer is working properly
     });
 }
 
@@ -157,12 +150,9 @@ function nextQuestion(index) {
         //Create buttons
         for (var i = 0; i < answerArr[index].length; i++) {
             var liEl = document.createElement("li");
-            // liEl.textContent = i+1 + ". " + answersOne[i];
-            // console.log(liEl);
             var currentAnswers = answerArr[index];
             var buttonToo = document.createElement("button");
             buttonToo.textContent = i + 1 + ". " + currentAnswers[i];
-            // buttonToo.setAttribute("value", answerArr[i]);
 
             buttonToo.setAttribute("class", "btnFlavor")
 
@@ -183,7 +173,6 @@ btnClick.addEventListener("click", function (event) {
     //Wipe off the screen when clicked
     nextQuestion(btnCounter);
     btnCounter++;
-    // console.log(btnCounter);
 });
 
 
@@ -205,8 +194,8 @@ answersEl.addEventListener("click", function (event) {
             secondsLeft -= 10;
             newP.textContent = `Wrong! You have answered ${answerCount} questions correctly!`;
         }
-        setTimeout(function(){ 
-            newP.textContent = ''; 
+        setTimeout(function () {
+            newP.textContent = '';
             newRule.style.display = 'none';
         }, 1500);
         //Wipe off the screen when clicked and update with next question or gameover screen
@@ -216,24 +205,54 @@ answersEl.addEventListener("click", function (event) {
         //Append feedback on correct or wrong answers below the answer list
         feedbackEl.appendChild(newRule);
         feedbackEl.appendChild(newP);
-        // console.log('Button Counter', btnCounter);
     }
 });
 
-//TODO: Button should display in top left corner and direct to view highscores
-//TODO: Format the button
+//Button that directs to the highscores page
 highscoreBtn.addEventListener("click", function (event) {
     event.preventDefault();
 
+    // Clear display on front page when clicked
     answersEl.innerHTML = '';
+    headerDisplay.textContent = 'High Scores';
+    timeDisplay.textContent = '';
+    btnClick.style.visibility = 'hidden';
+    pText.textContent = '';
+
     for (var i = 0; i < hsArr.length; i++) {
         var liElToo = document.createElement("li");
-        liElToo.textContent = `Player: ${hsArr[i].initials} Score: ${hsArr[i].score}`;
-        answersEl.appendChild(liElToo);           
-    }
-    
-    console.log('click');
+        liElToo.setAttribute("class", "fontFun");
 
+        //Sort array by highest to lowest
+        function compare(a, b) {
+            var scoreOne = a.score;
+            var scoreTwo = b.score;
+
+            return scoreTwo - scoreOne;
+        }
+
+        hsArr.sort(compare);
+
+        if (i % 2 === 0) {
+            liElToo.setAttribute('class', 'evenFlavor');
+        } else {
+            liElToo.setAttribute('class', 'oddFlavor');
+        }
+        liElToo.textContent = `Player: ${hsArr[i].initials} Score: ${hsArr[i].score}`;
+        answersEl.appendChild(liElToo);
+    }
+
+    feedbackEl.textContent = '';
+    var newBtnAlso = document.createElement("button");
+    newBtnAlso.textContent = "Restart Quiz";
+    newBtnAlso.setAttribute('class', 'btnFlavor');
+    feedbackEl.appendChild(newBtnAlso);
+
+    //reset game to beginning, refreshing timer
+    newBtnAlso.addEventListener("click", function (event) {
+        event.preventDefault();
+        location.reload();
+    });
 })
 
 //TODO: When the quiz ends, display your score and display input for initals to save the highscore into a list
