@@ -206,7 +206,7 @@ answersEl.addEventListener("click", function (event) {
         setTimeout(function () {
             newP.textContent = '';
             newRule.style.display = 'none';
-        }, 1500);
+        }, 2000);
         //Wipe off the screen when clicked and update with next question or gameover screen
         nextQuestion(btnCounter);
 
