@@ -7,8 +7,7 @@ var btnClick = document.getElementById("button-click");
 var timeEl = document.getElementById("timer");
 var answersEl = document.getElementById("answers");
 var feedbackEl = document.getElementById("feedback");
-//broken?
-var quiz = document.getElementsByClassName("quiz");
+var quiz = document.querySelector(".quiz");
 
 //Declare question arrays
 var questionArr = ["Which of the below heroes is not from Damacia?", "Who freed Sylas from the mageseeker compound?", "What race are Veigar, Rumble, and Poppy?", "Where is Miss Fortune from?"];
@@ -128,6 +127,20 @@ function gameOver() {
         newBtnAlso.addEventListener("click", function (event) {
             event.preventDefault();
             location.reload();
+        });
+
+        var newBtnAgain = document.createElement("button");
+        // var newPToo = document.createElement("p");
+        newBtnAgain.textContent = "Clear Scores";
+        newBtnAgain.setAttribute('class', 'btnFlavor');
+        feedbackEl.appendChild(newBtnAgain);
+        // quiz.appendChild(newPToo);
+
+        //reset scores in local storage
+        newBtnAgain.addEventListener("click", function (event) {
+            event.preventDefault();
+            localStorage.clear();
+            answersEl.textContent = '';
         });
     });
 }
@@ -252,6 +265,20 @@ highscoreBtn.addEventListener("click", function (event) {
     newBtnAlso.addEventListener("click", function (event) {
         event.preventDefault();
         location.reload();
+    });
+
+    var newBtnAgain = document.createElement("button");
+    // var newPToo = document.createElement("p");
+    newBtnAgain.textContent = "Clear Scores";
+    newBtnAgain.setAttribute('class', 'btnFlavor');
+    feedbackEl.appendChild(newBtnAgain);
+    // quiz.appendChild(newPToo);
+
+    //reset scores in local storage
+    newBtnAgain.addEventListener("click", function (event) {
+        event.preventDefault();
+        localStorage.clear();
+        answersEl.textContent = '';
     });
 })
 

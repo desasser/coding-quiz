@@ -2,23 +2,22 @@ body {
     font-family: Arial, Helvetica, sans-serif;    
     margin: 0;
     padding: 0;
-    background: lightgray;
+    background:slategray;
     
 }
 
 h1 {
     font-size: 42px;
-    /* width: 50vw;
-    margin: 0 auto;
-    padding: 20px; */
+    color: goldenrod;
 }
 
 header {
     width: 100vw;
-    height: 10vh;
+    height: 8vh;
     display: flex;
     justify-content: space-between;
     background-color: black;
+    
 }
 
 input {
@@ -39,39 +38,16 @@ input {
 
 /* Style the contiainer for the text */
 .pContainer {
-    width: 60vw;
+    width: 40vw;
     margin: 0 auto;
     line-height: 1.3em;
+    padding: 20px;
 }
 
-#feedback {
-    width:60vw;
-    margin: 0 auto;
-    text-Align: center;
-    font-Size: 24px;
-    font-Family: Arial, Helvetica, sans-serif;
-}
-/* View Highscores button, upper left corner */
-#highscoreBtn {
-    padding-top: 3vh;
-    color: white;
-    font-size: 18px;
-    /* display: flex; */
-    /* justify-content: flex-start; */
-    /* align-items: left; */
-}
-
-/* Time, upper right corner */
-#timeDisplay {
-    padding-top: 3vh;
-    font-Family: Arial, Helvetica, sans-serif;
-    font-Size: 18px;
-    font-Weight: bold;
-    color: white;
-}
 
 .fontFun {
     font-Family: Arial, Helvetica, sans-serif;
+        
     font-Size: 18px;
     font-Weight: bold;
 }
@@ -99,7 +75,7 @@ input {
 
 /* Modify button appearance */
 .btnFlavor {
-    background-color: cadetblue;
+    background-color: goldenrod;
     border-radius: 0.5em;
     font-size: 20px;
     margin: 10px;
@@ -108,15 +84,28 @@ input {
     border:none;
 }
 
-/* .answerBtn {
-    background-color: #bada55;
-    border-radius: 0.5em;
-    font-size: 20px;
-    margin: 10px;
-    height: 50px;
-    width: 150px;
-    border:none;
-} */
+#feedback {
+    width:60vw;
+    margin: 0 auto;
+    text-Align: center;
+    font-Size: 24px;
+    font-Family: Arial, Helvetica, sans-serif;
+}
+/* View Highscores button, upper left corner */
+#highscoreBtn {
+    padding-top: 3vh;
+    color: white;
+    font-size: 18px;
+}
+
+/* Time, upper right corner */
+#timeDisplay {
+    padding-top: 3vh;
+    font-Family: Arial, Helvetica, sans-serif;
+    font-Size: 18px;
+    font-Weight: bold;
+    color: white;
+}
 
 #answers {
     width:50vw;
