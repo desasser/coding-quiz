@@ -31,8 +31,8 @@ Instructions:
 -If you would like to clear the previous highscores, click clearscores to wipe out local storage
 
 Screenshots: 
-![alt text] (images\frontPage.jpg)
-![alt text] (images\quizOne.jpg)
-![alt text] (images\gameOver.jpg)
+![landing page] (https://raw.githubusercontent.com/desasser/coding-quiz/main/images/frontPage.jpg)
+![question example] (https://raw.githubusercontent.com/desasser/coding-quiz/main/images/quizOne.jpg)
+![gameover screen] (https://raw.githubusercontent.com/desasser/coding-quiz/main/images/gameOver.jpg)
 
 Link: https://desasser.github.io/coding-quiz/
