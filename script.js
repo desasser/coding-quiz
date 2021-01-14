@@ -1,39 +1,39 @@
 //Declare reference variables to HTML
-var highscoreBtn = document.getElementById("highscoreBtn");
-var timeDisplay = document.getElementById("timeDisplay");
-var headerDisplay = document.getElementById("header");
-var pText = document.getElementById("pText");
-var btnClick = document.getElementById("button-click");
-var timeEl = document.getElementById("timer");
-var answersEl = document.getElementById("answers");
-var feedbackEl = document.getElementById("feedback");
-var quiz = document.querySelector(".quiz");
+const highscoreBtn = document.getElementById("highscoreBtn");
+const timeDisplay = document.getElementById("timeDisplay");
+const headerDisplay = document.getElementById("header");
+const pText = document.getElementById("pText");
+const btnClick = document.getElementById("button-click");
+const timeEl = document.getElementById("timer");
+const answersEl = document.getElementById("answers");
+const feedbackEl = document.getElementById("feedback");
+const quiz = document.querySelector(".quiz");
 
 //Declare question arrays
-var questionArr = ["Which of the below heroes is not from Damacia?", "Who freed Sylas from the mageseeker compound?", "What race are Veigar, Rumble, and Poppy?", "Where is Miss Fortune from?"];
+const questionArr = ["Which of the below heroes is not from Damacia?", "Who freed Sylas from the mageseeker compound?", "What race are Veigar, Rumble, and Poppy?", "Where is Miss Fortune from?"];
 
 //Declare answer arrays
-var answersOne = ["Fiora", "Shyvana", "Poppy", "Darius"];
-var answersTwo = ["Senna", "Lux", "Swain", "Bard"];
-var answersThree = ["Yordle", "Human", "Vastayan", "Golem"];
-var answersFour = ["Noxus", "Ionia", "Piltover", "Bilgewater"];
-var answerArr = [answersOne, answersTwo, answersThree, answersFour];
-var correctAnswers = ["Darius", "Lux", "Yordle", "Bilgewater"];
+const answersOne = ["Fiora", "Shyvana", "Poppy", "Darius"];
+const answersTwo = ["Senna", "Lux", "Swain", "Bard"];
+const answersThree = ["Yordle", "Human", "Vastayan", "Golem"];
+const answersFour = ["Noxus", "Ionia", "Piltover", "Bilgewater"];
+const answerArr = [answersOne, answersTwo, answersThree, answersFour];
+const correctAnswers = ["Darius", "Lux", "Yordle", "Bilgewater"];
 
 //Declare p-tag for answer feedback and tracking
-var newP = document.createElement("p");
-var newRule = document.createElement("hr");
+const newP = document.createElement("p");
+const newRule = document.createElement("hr");
 
 //Declare counters
-var answerCount = 0;
-var secondsLeft = 60;
-var btnCounter = 0;
+let answerCount = 0;
+let secondsLeft = 60;
+let btnCounter = 0;
 
 //Declare high score variables
-var hsArr = JSON.parse(localStorage.getItem("gameData")) || [];
+const hsArr = JSON.parse(localStorage.getItem("gameData")) || [];
 
 //Declare timer variable
-var timerInterval;
+let timerInterval;
 
 function setTime() {
     timerInterval = setInterval(function () {
@@ -61,11 +61,11 @@ function gameOver() {
     pText.setAttribute("class", "fontFun");
     timeDisplay.textContent = "";
 
-    var newInput = document.createElement("input");
+    const newInput = document.createElement("input");
     newInput.setAttribute('type', 'text');
     feedbackEl.textContent = "Your Initials: ";
     feedbackEl.appendChild(newInput);
-    var newBtn = document.createElement("button");
+    const newBtn = document.createElement("button");
     newBtn.textContent = "SUBMIT";
     newBtn.setAttribute('class', 'btnFlavor');
     feedbackEl.appendChild(newBtn);
@@ -76,7 +76,7 @@ function gameOver() {
     newBtn.addEventListener("click", function (event) {
         event.preventDefault();
 
-        var hsObj = {
+        const hsObj = {
             initials: newInput.value.trim(),
             score: secondsLeft
         }
@@ -89,14 +89,14 @@ function gameOver() {
 
         localStorage.setItem('gameData', JSON.stringify(hsArr));
 
-        for (var i = 0; i < hsArr.length; i++) {
-            var liElToo = document.createElement('li');
+        for (let i = 0; i < hsArr.length; i++) {
+            const liElToo = document.createElement('li');
             liElToo.setAttribute('class', 'fontFun');
 
             //Sort array by highest to lowest
             function compare(a, b) {
-                var scoreOne = a.score;
-                var scoreTwo = b.score;
+                const scoreOne = a.score;
+                const scoreTwo = b.score;
 
                 return scoreTwo - scoreOne;
             }
@@ -114,7 +114,7 @@ function gameOver() {
 
         newInput.style.visibility = 'hidden';
         feedbackEl.textContent = '';
-        var newBtnAlso = document.createElement('button');
+        const newBtnAlso = document.createElement('button');
         newBtnAlso.textContent = 'Restart Quiz';
         newBtnAlso.setAttribute('class', 'btnFlavor');
         feedbackEl.appendChild(newBtnAlso);
@@ -125,8 +125,8 @@ function gameOver() {
             location.reload();
         });
 
-        var newBtnAgain = document.createElement("button");
-        // var newPToo = document.createElement("p");
+        const newBtnAgain = document.createElement("button");
+        // const newPToo = document.createElement("p");
         newBtnAgain.textContent = "Clear Scores";
         newBtnAgain.setAttribute('class', 'btnFlavor');
         feedbackEl.appendChild(newBtnAgain);
@@ -157,10 +157,10 @@ function nextQuestion(index) {
         //Index is the indicator for the question and answer set
         //So I want to access answerArr[index] and render the answers
         //Create buttons
-        for (var i = 0; i < answerArr[index].length; i++) {
-            var liEl = document.createElement("li");
-            var currentAnswers = answerArr[index];
-            var buttonToo = document.createElement("button");
+        for (let i = 0; i < answerArr[index].length; i++) {
+            const liEl = document.createElement("li");
+            const currentAnswers = answerArr[index];
+            const buttonToo = document.createElement("button");
             buttonToo.textContent = i + 1 + ". " + currentAnswers[i];
 
             buttonToo.setAttribute("class", "btnFlavor")
@@ -191,11 +191,11 @@ answersEl.addEventListener("click", function (event) {
 
     //Display the next question and beneath the answers, display whether the previous answer was right or wrong    
     //If button is clicked, then proceed
-    var element = event.target;
+    const element = event.target;
 
     if (element.matches("button") === true) {
         //Checks the answer from the user clicking the button against the answer array
-        var checkAnswer = event.target.textContent.split(" ")[1];
+        const checkAnswer = event.target.textContent.split(" ")[1];
         if (checkAnswer === correctAnswers[btnCounter - 1]) {
             answerCount++;
             newP.textContent = `Correct! You have answered ${answerCount} questions correctly!`;
@@ -228,14 +228,14 @@ highscoreBtn.addEventListener("click", function (event) {
     btnClick.style.visibility = 'hidden';
     pText.textContent = '';
 
-    for (var i = 0; i < hsArr.length; i++) {
-        var liElToo = document.createElement("li");
+    for (let i = 0; i < hsArr.length; i++) {
+        const liElToo = document.createElement("li");
         liElToo.setAttribute("class", "fontFun");
 
         //Sort array by highest to lowest
         function compare(a, b) {
-            var scoreOne = a.score;
-            var scoreTwo = b.score;
+            const scoreOne = a.score;
+            const scoreTwo = b.score;
 
             return scoreTwo - scoreOne;
         }
@@ -252,7 +252,7 @@ highscoreBtn.addEventListener("click", function (event) {
     }
 
     feedbackEl.textContent = '';
-    var newBtnAlso = document.createElement("button");
+    const newBtnAlso = document.createElement("button");
     newBtnAlso.textContent = "Restart Quiz";
     newBtnAlso.setAttribute('class', 'btnFlavor');
     feedbackEl.appendChild(newBtnAlso);
@@ -263,8 +263,8 @@ highscoreBtn.addEventListener("click", function (event) {
         location.reload();
     });
 
-    var newBtnAgain = document.createElement("button");
-    // var newPToo = document.createElement("p");
+    const newBtnAgain = document.createElement("button");
+    // const newPToo = document.createElement("p");
     newBtnAgain.textContent = "Clear Scores";
     newBtnAgain.setAttribute('class', 'btnFlavor');
     feedbackEl.appendChild(newBtnAgain);
